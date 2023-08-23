@@ -1,0 +1,26 @@
+body{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.texto-menor{
+    font-size: 13px;
+}
+.divs-facilidades i{
+    color:  #a10000;
+}
+.divs-facilidades .text-subtitulo{
+    color: #a10000;
+}
+.btn-verMais{
+    background-color: #a10000;
+    color: #fff;
+}
+.btn-verMais:hover{
+    background-color: #fff;
+    color: #a10000;
+    border: 1px solid #a10000;
+}
+.div-novidades{
+    width:50%;
+}
