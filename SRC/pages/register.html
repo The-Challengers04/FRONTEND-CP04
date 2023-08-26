@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<title>Agnello - Cadastro</title>
+	</head>
+
+	<body>
+		<div class="container mt-5">
+			<h2>Cadastro</h2>
+			<form novalidate>
+				<div class="mb-3">
+					<label for="nome" class="form-label">Nome</label>
+					<input type="text" class="form-control" id="name" required />
+					<div class="invalid-feedback" id="nameFeedback"></div>
+				</div>
+				<div class="mb-3">
+					<label for="sobrenome" class="form-label">Sobrenome</label>
+					<input type="text" class="form-control" id="lastName" required />
+					<div class="invalid-feedback" id="lastNameFeedback"></div>
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">Email</label>
+					<input type="email" class="form-control" id="email" required />
+					<div class="invalid-feedback" id="emailFeedback"></div>
+				</div>
+				<div class="mb-3">
+					<label for="senha" class="form-label">Senha</label>
+					<input type="password" class="form-control" id="password" required />
+					<i
+						class="fa fa-eye"
+						id="eyeIconPassword"
+						style="
+							position: relative;
+							float: right;
+							top: -1.75em;
+							right: 1em;
+							cursor: pointer;
+						"
+					></i>
+					<div class="invalid-feedback" id="passwordFeedback"></div>
+				</div>
+				<div class="mb-3">
+					<label for="confirmarSenha" class="form-label">Confirmar Senha</label>
+					<input
+						type="password"
+						class="form-control"
+						id="confirmPassword"
+						required
+					/>
+					<i
+						class="fa fa-eye"
+						id="eyeIconConfirmPassword"
+						style="
+							position: relative;
+							float: right;
+							top: -1.75em;
+							right: 1em;
+							cursor: pointer;
+						"
+					></i>
+					<div class="invalid-feedback" id="confirmPasswordFeedback"></div>
+				</div>
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</form>
+		</div>
+		<script>
+			(function () {
+				"use strict";
+
+				var form = document.querySelector("form");
+
+				const name = document.querySelector("#name");
+				const lastName = document.querySelector("#lastName");
+				const email = document.querySelector("#email");
+				const password = document.querySelector("#password");
+				const confirmPassword = document.querySelector("#confirmPassword");
+
+				name.feedBack = document.querySelector("#nameFeedback");
+				lastName.feedBack = document.querySelector("#lastNameFeedback");
+				email.feedBack = document.querySelector("#emailFeedback");
+				password.feedBack = document.querySelector("#passwordFeedback");
+				confirmPassword.feedBack = document.querySelector(
+					"#confirmPasswordFeedback"
+				);
+
+				password.eyeIcon = document.querySelector("#eyeIconPassword");
+				confirmPassword.eyeIcon = document.querySelector(
+					"#eyeIconConfirmPassword"
+				);
+
+				password.eyeIcon.addEventListener("click", () => {
+					if (password.type === "password") {
+						password.type = "text";
+						password.eyeIcon.classList.remove("fa-eye");
+						password.eyeIcon.classList.add("fa-eye-slash");
+					} else {
+						password.type = "password";
+						password.eyeIcon.classList.remove("fa-eye-slash");
+						password.eyeIcon.classList.add("fa-eye");
+					}
+				});
+
+				confirmPassword.eyeIcon.addEventListener("click", () => {
+					if (confirmPassword.type === "password") {
+						confirmPassword.type = "text";
+						confirmPassword.eyeIcon.classList.remove("fa-eye");
+						confirmPassword.eyeIcon.classList.add("fa-eye-slash");
+					} else {
+						confirmPassword.type = "password";
+						confirmPassword.eyeIcon.classList.remove("fa-eye-slash");
+						confirmPassword.eyeIcon.classList.add("fa-eye");
+					}
+				});
+
+				function isValidEmail(email) {
+					var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+					return emailPattern.test(email);
+				}
+
+				form.addEventListener("submit", (event) => {
+					let formIsValid = true;
+					event.preventDefault();
+
+					if (name.value === "") {
+						name.feedBack.textContent = "O nome não pode ser vazio.";
+						name.classList.add("is-invalid");
+						formIsValid = false;
+					}
+					if (lastName.value === "") {
+						lastName.feedBack.textContent = "O sobrenome não pode ser vazio.";
+						lastName.classList.add("is-invalid");
+						formIsValid = false;
+					}
+					if (email.value === "") {
+						email.feedBack.textContent = "O email não pode ser vazio.";
+						email.classList.add("is-invalid");
+						formIsValid = false;
+					} else if (!isValidEmail(email.value)) {
+						email.feedBack.textContent = "O email não é válido.";
+						email.classList.add("is-invalid");
+						formIsValid = false;
+					}
+					if (password.value === "") {
+						password.feedBack.textContent = "A senha não pode ser vazia.";
+						password.classList.add("is-invalid");
+						formIsValid = false;
+					} else if (password.value.length < 8) {
+						password.feedBack.textContent =
+							"A senha deve ter no mínimo 8 caracteres.";
+						password.classList.add("is-invalid");
+						formIsValid = false;
+					}
+					if (password.value !== confirmPassword.value) {
+						confirmPassword.feedBack.textContent = "As senhas não coincidem.";
+						confirmPassword.classList.add("is-invalid");
+						formIsValid = false;
+					}
+
+					if (formIsValid) {
+						console.log("Forms Valido");
+						const user = {
+							name: name.value,
+							lastName: lastName.value,
+							email: email.value,
+							password: password.value,
+						};
+						let userList = JSON.parse(localStorage.getItem("UserList")) || [];
+						userList.push(user);
+						localStorage.setItem("UserList", JSON.stringify(userList));
+						window.location.href = "./login.html";
+					}
+				});
+
+				// Retirar o is-invalid quando o usuario começar a digitar no input
+				function addEventToRemoveIsInvalidFromInput(event) {
+					event.addEventListener("input", () => {
+						event.classList.remove("is-invalid");
+					});
+				}
+				addEventToRemoveIsInvalidFromInput(name);
+				addEventToRemoveIsInvalidFromInput(lastName);
+				addEventToRemoveIsInvalidFromInput(email);
+				addEventToRemoveIsInvalidFromInput(password);
+				addEventToRemoveIsInvalidFromInput(confirmPassword);
+			})();
+		</script>
+	</body>
+</html>

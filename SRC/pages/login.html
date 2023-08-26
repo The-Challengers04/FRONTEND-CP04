@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Agnello - Login</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+			crossorigin="anonymous"
+			defer
+		></script>
+		<script src="../JS/login.js" defer></script>
+	</head>
+	<body>
+		<div
+			class="container-sm position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center"
+			style="
+				width: 100%;
+				background-color: #a7a7a760;
+				border-radius: 2em;
+				padding: 1em;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+			"
+		>
+			<form
+				novalidate
+				style="
+					width: 90%;
+					max-width: 40em;
+					background-color: #fff;
+					border-radius: 0.5em;
+					padding: 1em;
+					box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+				"
+			>
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label"
+						>Email address</label
+					>
+					<input
+						type="email"
+						class="form-control"
+						id="email"
+						aria-describedby="emailHelp"
+						placeholder="endereco@email.com"
+					/>
+					<div class="invalid-feedback" id="emailFeedback"></div>
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Password</label>
+					<input type="password" class="form-control" id="password" />
+					<i
+						class="fa fa-eye"
+						id="eyeIconPassword"
+						style="
+							position: relative;
+							float: right;
+							top: -1.75em;
+							right: 1em;
+							cursor: pointer;
+						"
+					></i>
+					<div class="invalid-feedback" id="passwordFeedback"></div>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+			<div class="mt-3 align-content-center">
+				<p class="h5">Ainda não tem login?</p>
+				<a href="./register.html"><p class="h5">Cadastre-se</p></a>
+			</div>
+		</div>
+	</body>
+</html>
