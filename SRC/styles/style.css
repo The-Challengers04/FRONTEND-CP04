@@ -12,15 +12,15 @@ body{
 .divs-facilidades .text-subtitulo{
     color: #a10000;
 }
-.btn-verMais{
+.btn-botoes{
     background-color: #a10000;
     color: #fff;
 }
-.btn-verMais:hover{
+.btn-botoes:hover{
     background-color: #fff;
     color: #a10000;
     border: 1px solid #a10000;
 }
 .div-novidades{
-    width:50%;
+    width:100%;
 }
